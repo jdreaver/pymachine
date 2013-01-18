@@ -5,6 +5,25 @@ The data can either be totally artificial or simply modified real data.
 
 import numpy as np
 
+
+def infer_dimension(bounds):
+    """Computes the dimension of bounds.
+
+    Computes the dimension of the bounds.
+
+    Args:
+        bounds: plane defined by [x1_min, x1_max, x2_min, x2_max, ...]
+
+    Returns:
+        Integer: dimension of bounds.
+    """
+
+    bounds = np.asarray(bounds).flatten()
+    assert len(bounds) % 2 == 0, "Bad bounding plane given."
+    dimension = bounds.length/2
+    return dimension
+
+
 def random_plane_points(num_points, bounds=[-1, 1, -1, 1]):
     """Generates random points on plane.
 
@@ -22,9 +41,7 @@ def random_plane_points(num_points, bounds=[-1, 1, -1, 1]):
     """
 
     # Infer dimension of data from bounds
-    bounds = np.asarray(bounds).flatten()
-    assert len(bounds) % 2 == 0, "Bad bounding plane given."
-    dimension = bounds.length/2
+    dimension = infer_dimension(bounds)
 
     # Generate points and rescale to fit bounds
     points = np.random.rand(num_points, dimension)
