@@ -5,7 +5,7 @@ The data can either be totally artificial or simply modified real data.
 
 import numpy as np
 
-def random_plane_points(num_points, bounds=[-1,1,-1,1]):
+def random_plane_points(num_points, bounds=[-1, 1, -1, 1]):
     """Generates random points on plane.
 
     Generates points uniformly on a plane defined by the bounds
@@ -23,7 +23,7 @@ def random_plane_points(num_points, bounds=[-1,1,-1,1]):
 
     # Infer dimension of data from bounds
     bounds = np.asarray(bounds).flatten()
-    assert len(bounds) % 2 == 0
+    assert len(bounds) % 2 == 0, "Bad bounding plane given."
     dimension = bounds.length/2
 
     # Generate points and rescale to fit bounds
