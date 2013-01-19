@@ -111,5 +111,6 @@ def random_linearly_separable_data(num_points, bounds):
 
     points = random_plane_points(num_points, bounds)
     weights = random_hyperplane(bounds)
-    labels = np.sign(np.dot(points, weights))
+    labels = np.sign(np.dot(np.column_stack([np.ones((num_points, 1)), 
+                                             points]), weights))
     return (points, labels, weights)

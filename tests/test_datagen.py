@@ -20,4 +20,15 @@ def test_random_gens():
         random_line = datagen.random_hyperplane(bounds)
         assert len(random_line) == dimension + 1
 
+def test_linearly_separable():
+    "Maybe stick a PLA solver in here too?"
+    num_points = 100
+    for dimension in range(2, 5):
+        bounds = datagen.unit_bounds(dimension)
+        (X, y, weights) = datagen.random_linearly_separable_data(num_points, 
+                                                                 bounds)
+        X_in = np.column_stack([np.ones((num_points, 1)), X])
+        assert np.all(y == np.sign(np.dot(X_in, weights)))
+        
+
     
