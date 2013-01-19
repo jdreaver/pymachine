@@ -30,7 +30,7 @@ def unit_bounds(dimension):
 
     """Generates unit bounds for given dimension."""
 
-    return [-1, 1] * dimension
+    return [-1.0, 1.0] * dimension
 
 
 def random_plane_points(num_points, bounds):
