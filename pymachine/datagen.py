@@ -63,29 +63,31 @@ def random_plane_points(num_points, bounds):
     return rescaled_points
 
 
-def random_plane_line(bounds):
+def random_hyperplane(bounds):
 
-    """Creates random line bounded on plane.
+    """Creates random hyperplane through points in bounds.
 
-    Randomly generates two points within bounds and returns the 
-    set of weights w such that dot(w,x)= 0 for all points x that
-    lie on the resulting line.
+    Randomly generates points within bounds and returns the set of
+    weights w such that dot(w,x)= 0 for all points x that lie on the
+    resulting hyperplane. Note that x needs a constant 1 term to
+    account for bias term in weights. For example, the point (2.5, 1.1) is
+    x = [1, 2.5, 1.1]
 
     Args:
         bounds: plane defined by [x1_min, x1_max, x2_min, x2_max, ...]
 
     Returns:
-        The line through two random points.
+        The hyperplane within bounds.
+
     """
 
     (bounds, dimension) = infer_dimension(bounds)
-    assert dimension == 2
-    intercept_points = random_plane_points(2, bounds)
+    intercept_points = random_plane_points(dimension, bounds)
 
     # Solve for weights. Bias is arbitrary
-    bias = 0.5
+    bias = 1
     line_weights = np.linalg.solve(intercept_points, 
-                                   np.ones((dimension, 1)) * -bias)
+                                   np.ones((dimension, 1)) * - bias)
     line_weights *= np.sign(np.random.rand(1) - 0.5) # Randomize direction
 
     return np.append(bias, line_weights)
