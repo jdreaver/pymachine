@@ -93,3 +93,23 @@ def random_hyperplane(bounds):
     return np.append(bias, line_weights)
     
     
+def random_linearly_separable_data(num_points, bounds):
+    """Creates two linearly separable sets of points in bounds.
+
+    First comutes the dimension of bounds and creates a hyperplane
+    within bounds. Then, creates uniformly distributed points and
+    assigns labels based off of the hyperplane.
+    
+    Args:
+        bounds: plane defined by [x1_min, x1_max, x2_min, x2_max, ...]
+
+    Returns:
+        A matrix X of shape num_points by dimension containing random 
+        points in bounds, a set of weights w for a hyperplane in bounds, 
+        and a vector with labels created by sign(dot(X, w)).
+    """
+
+    points = random_plane_points(num_points, bounds)
+    weights = random_hyperplane(bounds)
+    labels = np.sign(np.dot(points, weights))
+    return (points, labels, weights)
