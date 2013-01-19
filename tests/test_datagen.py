@@ -1,12 +1,23 @@
 """Tests for pymachine.datagen"""
 
-import pymachine.datagen
+import numpy as np
 
-def test_points():
+from pymachine import datagen
+
+def test_bounds():
     bad_bounds = [-1, 1, 1]
     try:
-        pymachine.datagen.infer_dimension(bad_bounds)
+        datagen.infer_dimension(bad_bounds)
     except AssertionError:
         pass
+
+def test_random_gens():
+    for dimension in [2]:
+        bounds = datagen.unit_bounds(dimension)
+        random_points = datagen.random_plane_points(4, bounds)
+        assert np.array_equal(random_points.shape, (4, dimension))
+        
+        random_line = datagen.random_plane_line(bounds)
+        assert len(random_line) == dimension + 1
 
     
