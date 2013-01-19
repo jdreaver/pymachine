@@ -7,6 +7,7 @@ import numpy as np
 
 
 def infer_dimension(bounds):
+
     """Computes the dimension of bounds.
 
     Computes the dimension of the bounds and reshapes the bounds into a 
@@ -26,11 +27,14 @@ def infer_dimension(bounds):
 
 
 def unit_bounds(dimension):
+
     """Generates unit bounds for given dimension."""
-    return [-1,1]*dimension
+
+    return [-1, 1] * dimension
 
 
-def random_plane_points(num_points, bounds=[-1, 1, -1, 1]):
+def random_plane_points(num_points, bounds):
+
     """Generates random points on plane.
 
     Generates points uniformly on a plane defined by the bounds
@@ -53,13 +57,14 @@ def random_plane_points(num_points, bounds=[-1, 1, -1, 1]):
     points = np.random.rand(num_points, dimension)
     unit_mean = [0.5] * dimension
     shifted_points = points - unit_mean + bounds.mean(axis=1)
-    scale = bounds[:,1] - bounds[:,0]
+    scale = bounds[:, 1] - bounds[:, 0]
     rescaled_points = np.dot(shifted_points, np.diag(scale))
 
     return rescaled_points
 
 
-def random_plane_line(bounds=[-1, 1, -1, 1]):
+def random_plane_line(bounds):
+
     """Creates random line bounded on plane.
 
     Randomly generates two points within bounds and returns the 
@@ -83,6 +88,6 @@ def random_plane_line(bounds=[-1, 1, -1, 1]):
                                    np.ones((dimension, 1)) * -bias)
     line_weights *= np.sign(np.random.rand(1) - 0.5) # Randomize direction
 
-    return np.append(bias,line_weights)
+    return np.append(bias, line_weights)
     
     
