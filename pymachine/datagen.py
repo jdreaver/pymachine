@@ -78,7 +78,6 @@ def random_hyperplane(bounds):
 
     Returns:
         The hyperplane within bounds.
-
     """
 
     (bounds, dimension) = infer_dimension(bounds)
