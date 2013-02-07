@@ -19,11 +19,11 @@ class PLA():
         self.bounds = datagen.unit_bounds(dimension)
         self.damping = damping
 
-    def fit(self, feature_matrix, labels):
+    def fit(self, feature_matrix, labels, maxiter=1000):
         self.data = features_to_pla(feature_matrix)
         self.X = np.array(self.data)
         self.y = labels
-        (self.weights, self.num_iters) = run_pla(self.X, self.y)
+        (self.weights, self.num_iters) = run_pla(self.X, self.y, maxiter=maxiter)
 
 
 def compute_rho(weights, X):

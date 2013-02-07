@@ -1,11 +1,5 @@
-Ä}q(U</usr/local/lib/python2.7/dist-packages/numpy/core/numeric.py}q(Uasarrayqcrope.base.oi.memorydb
+Ä}q(U</usr/local/lib/python2.7/dist-packages/numpy/core/numeric.py}q(Uasarraycrope.base.oi.memorydb
 ScopeInfo
-q)Åq}qUunknownÖqUnoneqÖq	h	áUunknownÖq
-s}qÜbUonesqh)Åq}q(UbuiltinqUtupleqhUunknownÖqth	h	áh
-s}qÜbuU=/usr/local/lib/python2.7/dist-packages/numpy/linalg/linalg.py}q(Usolveqh)Åq}qhhÜh
-s}qÜbU
-_makearrayqh)Åq}qhÖ(hhhhts}qÜbuU?/usr/local/lib/python2.7/dist-packages/numpy/lib/twodim_base.py}qUdiagqh)Åq}qhh	Üh
-s}q ÜbsUpymachine/datagen.pyq!}q"(Urandom_hyperplaneq#h)Åq$}q%hÖh
-s}q&ÜbUinfer_dimensionq'h)Åq(}q)hÖ(hhh	hts}q*ÜbUrandom_plane_pointsq+h)Åq,}q-hhÜh
-s}q.ÜbuUA/usr/local/lib/python2.7/dist-packages/numpy/lib/function_base.py}q/Uappendq0h)Åq1}q2hhh	áh
-s}q3Übsu.
+q)Åq}qUunknownÖqUnoneÖqháUunknownÖqs}q	ÜbUonesh)Åq
+}q(UbuiltinqUtupleqhUunknownÖqthháhs}qÜbuUpymachine/datagen.pyq}q(Uunit_boundsqh)Åq}qUunknownÖqÖUbuiltinqUlistqUunknownÖqás}qÜbUrandom_hyperplaneh)Åq}qhÖhs}qÜbUinfer_dimensionh)Åq}qhÖ(hhhhts}qÜbUrandom_plane_pointsh)Åq }q!(hhhháÜUunknownÖq"hhhUnoneq#Öq$áÜh"hhÜhu}q%ÜbuUscripts/perceptron_break.pyq&}q'Utest_all_dichotomiesq(h)Åq)}q*((hhhhUinstanceq+Udefinedq,Upymachine/perceptron.pyq-UPLAq.áÜth"(hhhh+h,h-h.áÜth"u}q/ÜbsUA/usr/local/lib/python2.7/dist-packages/numpy/lib/function_base.py}q0Uappendh)Åq1}q2hhháhs}q3ÜbsU=/usr/local/lib/python2.7/dist-packages/numpy/linalg/linalg.py}q4(Usolveh)Åq5}q6hhÜhs}q7ÜbU
+_makearrayh)Åq8}q9hÖ(hhhhts}q:ÜbuU?/usr/local/lib/python2.7/dist-packages/numpy/lib/twodim_base.py}q;Udiagh)Åq<}q=hhÜhs}q>Übsh-}q?(UPLA.fith)Åq@}qA((h+h,h-h.áÜhhhth"(h+h,h-h.áÜhhh+h,h-h.áÜth"u}qBÜbUPLA.__init__h)ÅqC}qDh+h,h-h.áÜhh$áh"s}qEÜbuu.

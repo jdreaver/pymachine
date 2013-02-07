@@ -113,3 +113,14 @@ def random_linearly_separable_data(num_points, bounds):
     labels = np.sign(np.dot(np.column_stack([np.ones((num_points, 1)), 
                                              points]), weights))
     return (points, labels, weights)
+
+def flip_random_labels(labels, percent):
+
+    """Changes the sign of a percentage of labels."""
+
+    assert percent <= 1.0 and percent >= 0.0
+    
+    num_labels = len(labels)
+    indices = np.random.permutation(num_labels)[:int(num_labels * percent)]
+    labels[indices] = -labels[indices]
+    return labels
