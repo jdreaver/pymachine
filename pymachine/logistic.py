@@ -9,6 +9,10 @@ def logistic_gradient(x, y, weights):
 def logistic_error(X, y, weights):
     return np.mean(np.log(1 + np.exp(-y * np.dot(X, weights))))
 
+def cross_entropy_error(X, y, weights):
+    return np.mean(np.log(1 + np.exp(-y * np.dot(weights, X.T))))
+
+
 def logistic_gradient_descent(X, y, tol, eta, max_iter):
 
     """Stochastic gradient descent for logistic regression.

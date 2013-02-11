@@ -2,7 +2,8 @@
 
 import numpy as np
 
-from datagen import random_plane_points
+from pymachine.datagen import random_plane_points
+from pymachine.logistic import cross_entropy_error
 
 def linear_Eout(f, g, bounds, N=10000):
 
@@ -13,7 +14,7 @@ def linear_Eout(f, g, bounds, N=10000):
     in labels from the two lines defined by f and g.
 
     Args:
-        f, g: two lines defned by weights (with bias term)
+        f, g: two lines defined by weights (with bias term)
         bounds: bounds used to generate random points
         N: number of points to generate
 
@@ -25,3 +26,24 @@ def linear_Eout(f, g, bounds, N=10000):
     labels_f = np.sign(np.dot(X, f))
     labels_g = np.sign(np.dot(X, g))
     return np.where(labels_f==labels_g, 0, 1.0).mean()
+
+def cross_entropy_Eout(f, g, bounds, N=10000):
+
+    """Computes cross entropy out of sample error for linear model.
+
+    The cross entropy error is similar to the linear_Eout error, but
+    instead of simply taking the proportion of wrong labels, we use cross
+    entropy to get an error.
+
+    Args:
+        f, g: two lines defined by weights (with bias term)
+        bounds: bounds used to generate random points
+        N: number of points to generate
+
+    Returns:
+        Cross entropy error from g to f.
+    """
+
+    X = np.hstack([np.ones((N, 1)), random_plane_points(N, bounds)])
+    labels_f = np.sign(np.dot(X, f))
+    return cross_entropy_error(X, labels_f, g)
