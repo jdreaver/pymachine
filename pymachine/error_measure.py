@@ -5,7 +5,7 @@ import numpy as np
 from pymachine.datagen import random_plane_points
 from pymachine.logistic import cross_entropy_error
 
-def linear_Eout(f, g, bounds, N=10000):
+def linear_randomized_Eout(f, g, bounds, N=10000):
 
     """Computes out of sample error for two linear weights.
 
@@ -27,7 +27,13 @@ def linear_Eout(f, g, bounds, N=10000):
     labels_g = np.sign(np.dot(X, g))
     return np.where(labels_f==labels_g, 0, 1.0).mean()
 
-def cross_entropy_Eout(f, g, bounds, N=10000):
+def linear_error(X, y, w):
+
+    """Computes proprotion of X.T*w != y"""
+
+    return np.where(y != np.dot(X, w), 1.0, 0.0).mean()
+
+def cross_entropy_randomized_Eout(f, g, bounds, N=10000):
 
     """Computes cross entropy out of sample error for linear model.
 

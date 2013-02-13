@@ -3,7 +3,7 @@ import numpy as np
 
 from pymachine.datagen import random_linearly_separable_data
 from pymachine.logistic import logistic_gradient_descent
-from pymachine.error_measure import cross_entropy_Eout
+from pymachine.error_measure import cross_entropy_randomized_Eout
 
 import matplotlib.pyplot as plt
 
@@ -17,7 +17,7 @@ def linsep_logistic(num_points=100, num_experiments=100, tol=0.01, eta=0.01, max
     for i in range(num_experiments):
         (X, y, f) = random_linearly_separable_data(num_points, bounds)
         (weights, num_epochs) = logistic_gradient_descent(X, y, tol, eta, max_iter)
-        E_out = cross_entropy_Eout(f, weights, bounds)
+        E_out = cross_entropy_randomized_Eout(f, weights, bounds)
         all_epochs[i] = num_epochs
         all_E_out[i] = E_out
         print i+1, num_epochs, E_out
@@ -29,7 +29,7 @@ def test(num_points=100, tol=0.01, eta=0.01, max_iter=2000):
     (X, y, f) = random_linearly_separable_data(num_points, bounds)
     (w, num) = logistic_gradient_descent(X, y, tol, eta, max_iter)
 
-    print num, cross_entropy_Eout(f, w, bounds)
+    print num, cross_entropy_randomized_Eout(f, w, bounds)
     
     positives = X[np.where(y==1)]
     negatives = X[np.where(y==-1)]
