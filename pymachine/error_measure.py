@@ -31,7 +31,7 @@ def linear_error(X, y, w):
 
     """Computes proprotion of X.T*w != y"""
 
-    return np.where(y != np.dot(X, w), 1.0, 0.0).mean()
+    return np.where(y != np.sign(np.dot(X, w)), 1.0, 0.0).mean()
 
 def cross_entropy_randomized_Eout(f, g, bounds, N=10000):
 
