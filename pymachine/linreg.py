@@ -14,5 +14,5 @@ def weight_decay_regression(X, y, decay):
     """Performs linear regression with weight decay."""
 
     (N, dim) = X.shape
-    return np.linalg.solve(np.dot(X.T, X) + decay * np.identity(dim), 
+    return np.linalg.solve(np.dot(X.T, X) + (decay * np.identity(dim)), 
                            np.dot(X.T, y))
