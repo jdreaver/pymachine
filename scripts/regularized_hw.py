@@ -31,19 +31,26 @@ def transform(X):
                       abs(x[0]-x[1]), abs(x[0]+x[1])]
                      for x in X]) 
     
-def plot_nonreg():
+def plot_sample(nonreg=True, k = 0):
     (X_train_raw, y_train, X_test_raw, y_test) = get_data()
     X_train = transform(X_train_raw)
     X_test = transform(X_test_raw)
+    N = X_train.shape[0]
 
-    w_nonreg = linear_regression(X_train, y_train)
+    if nonreg is True:
+        w = linear_regression(X_train, y_train)
+    else:
+        w = weight_decay_regression(X_train, y_train, 10.0**k/N)
 
     def plot_decision_fn(X):
         X_trans = transform(X)
-        return np.sign(np.dot(X_trans, w_nonreg))
+        return np.sign(np.dot(X_trans, w))
 
-    (cont_x, cont_y, cont_z) = decision_boundary_2D(-1, 1, 0.01, -1, 1, 0.01, 
+    (cont_x, cont_y, cont_z) = decision_boundary_2D(-1, 1, 0.0025, -1, 1, 0.0025, 
                                                     plot_decision_fn)
+
+    print "E_in :", linear_error(X_train, y_train, w)
+    print "E_out:", linear_error(X_test, y_test, w)
 
     x_plot = X_test_raw[:,0]
     y_plot = X_test_raw[:,1]
@@ -56,7 +63,7 @@ def plot_nonreg():
     plt.show()
 
 def answers():
-    k_list = np.array([-3, -2, -1, 0, 1, 2, 3])
+    k_list = np.array([-3, -2, -1, 0, 1, 2, 3, 4])
 
     (X_train_raw, y_train, X_test_raw, y_test) = get_data()
     X_train = transform(X_train_raw)
@@ -70,9 +77,9 @@ def answers():
     N = X_train.shape[0]
     print "Number of points:", N
     print "Non-regularized stats: "
-    print "   E_in: ", E_in_nonreg
-    print "   E_out:", E_out_nonreg
-    print "   wsum: ", np.power(w_nonreg, 2).sum()
+    print "   E_in:   ", E_in_nonreg
+    print "   E_out:  ", E_out_nonreg
+    print "   w^2sum: ", np.power(w_nonreg, 2).sum()
 
     print "Regularized stats: "
     E_in_reg = np.zeros(len(k_list))
@@ -86,7 +93,7 @@ def answers():
         print "   k =", k, "constant =", 10.0**k/N
         print "      E_in:   ", E_in_reg[i]
         print "      E_out:  ", E_out_reg[i]
-        print "      wsum:   ", np.power(w_reg, 2).sum()
+        print "      w^2sum: ", np.power(w_reg, 2).sum()
 
 if __name__ == '__main__':
     pass
