@@ -3,7 +3,6 @@ This module implements the perceptron learning algorithm.
 """
 
 import numpy as np
-import pandas as pd
 from pandas import DataFrame
 
 from pymachine import datagen
@@ -15,8 +14,11 @@ class PLA():
     perceptron learning algorithm. 
     """
 
-    def __init__(self, dimension=2, damping=None):
-        self.bounds = datagen.unit_bounds(dimension)
+    def __init__(self, dimension=2, damping=None, bounds=None):
+        if bounds is None:
+            self.bounds = datagen.unit_bounds(dimension)
+        else:
+            self.bounds = bounds
         self.damping = damping
 
     def fit(self, feature_matrix, labels, maxiter=1000):
