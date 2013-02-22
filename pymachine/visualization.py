@@ -33,3 +33,9 @@ def decision_boundary_2D(xmin, xmax, xdelta, ymin, ymax, ydelta, decision_fn):
     labels = decision_fn(grid)
     Z = labels.reshape((len(y), len(x)))
     return (X, Y, Z)
+
+def weights_to_mxb_2D(w, bounds):
+    bounds = np.array(bounds)
+    x = bounds[:2]
+    y = -x*w[1]/w[2] - w[0]/w[2]
+    return (x,y)

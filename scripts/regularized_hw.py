@@ -62,21 +62,50 @@ def plot_sample(nonreg=True, k = 0):
     plt.grid()
     plt.show()
 
+def test_weight_decay():
+    k = 3
+    
+    (X_train_raw, y_train, X_test_raw, y_test) = get_data()
+    X_train = transform(X_train_raw)
+    X_test = transform(X_test_raw)
+    (N, dim) = X_train.shape
+
+    w_reg = weight_decay_regression(X_train, y_train, 10.0**k/N)
+    w_reg1 = np.dot(np.linalg.inv(np.dot(X_train.T, X_train) + 
+                                  (10.0**k/N * np.identity(dim))),
+                    np.dot(X_train.T, y_train))
+    w_reg2 = np.linalg.solve(np.dot(X_train.T, X_train) + (10.0**k/N * np.identity(dim)), 
+                             np.dot(X_train.T, y_train))
+    print w_reg - w_reg1
+    #print w_reg - w_reg2
+    print w_reg
+    E_in_reg = linear_error(X_train, y_train, w_reg)
+    E_out_reg = linear_error(X_test, y_test, w_reg)
+    
+    print "k =", k, "constant =", 10.0**k/N
+    print "   E_in:   ", E_in_reg
+    print "   E_out:  ", E_out_reg
+    print "   w^2sum: ", np.power(w_reg, 2).sum()
+
 def answers():
-    k_list = np.array([-3, -2, -1, 0, 1, 2, 3, 4])
+    k_list = np.array([-3, -2, -1, 0, 1, 2, 3])
 
     (X_train_raw, y_train, X_test_raw, y_test) = get_data()
     X_train = transform(X_train_raw)
     X_test = transform(X_test_raw)
+
+    assert X_train.shape[0] == y_train.shape[0]
+    assert X_test.shape[0] == y_test.shape[0]
 
     w_nonreg = linear_regression(X_train, y_train)
 
     E_in_nonreg = linear_error(X_train, y_train, w_nonreg)
     E_out_nonreg = linear_error(X_test, y_test, w_nonreg)
 
-    N = X_train.shape[0]
-    print "Number of points:", N
-    print "Non-regularized stats: "
+
+    print "Number of train points:", X_train.shape[0]
+    print "Number of test points: ", X_test.shape[0]
+    print "\nNon-regularized stats: "
     print "   E_in:   ", E_in_nonreg
     print "   E_out:  ", E_out_nonreg
     print "   w^2sum: ", np.power(w_nonreg, 2).sum()
@@ -86,14 +115,16 @@ def answers():
     E_out_reg = np.zeros(len(k_list))
     
     for i, k in enumerate(k_list):
-        w_reg = weight_decay_regression(X_train, y_train, 10.0**k/N)
+        decay = 10.0**k
+        w_reg = weight_decay_regression(X_train, y_train, decay)
         E_in_reg[i] = linear_error(X_train, y_train, w_reg)
         E_out_reg[i] = linear_error(X_test, y_test, w_reg)
 
-        print "   k =", k, "constant =", 10.0**k/N
+        print "   k =", k, "constant =", decay
         print "      E_in:   ", E_in_reg[i]
         print "      E_out:  ", E_out_reg[i]
         print "      w^2sum: ", np.power(w_reg, 2).sum()
 
 if __name__ == '__main__':
-    pass
+    answers()
+    #test_weight_decay()
