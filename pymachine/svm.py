@@ -21,14 +21,11 @@ def linsep_svm(X, y):
     w = np.sum(alpha*y*X.T, axis=1)
     support_vectors = np.where(alpha > 0.01)[0]
 
-    # b_index = np.argmax(alpha)
-    # b = 1.0/y[b_index] - np.dot(w, X[b_index])
+    #b_index = np.argmax(alpha)
+    #b = 1.0/y[b_index] - np.dot(w, X[b_index])
     ## Compute b using Bishop formula
-    N_sv = len(support_vectors)
     X_sv = X[support_vectors]
     y_sv = y[support_vectors]
     b = np.mean(y_sv - np.dot(X_sv, w))
-
-    
     return (np.insert(w, 0, b), support_vectors)
     

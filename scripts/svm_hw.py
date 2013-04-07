@@ -10,7 +10,7 @@ from pymachine.visualization import weights_to_mxb_2D
 bounds = [-1, 1, -1, 1]
 
 def plot_svm():
-    num_points = 20
+    num_points = 10
     (X, y, f) = random_linearly_separable_data(num_points, bounds)
     (w_svm, vectors) = linsep_svm(X, y)
     
@@ -18,16 +18,24 @@ def plot_svm():
     y_plot = X[:,1]
     s = 20*np.ones(num_points)
     s[vectors] = 60
-    #markers = np.chararray(num_points)
-    #markers[:] = 'o'
-    #markers[vectors] = 'D'
+
+    pla = PLA(bounds=bounds)
+    pla.fit(X, y)
+    w_pla = pla.weights
+    
+    # test values for b
+    print("Average b:",  w_svm[0])
+    each_b = y[vectors] - np.dot(X[vectors], w_svm[1:])
+    print("Individual b's:",  each_b)
 
     (x_f, y_f) = weights_to_mxb_2D(f, bounds)
     (x_w, y_w) = weights_to_mxb_2D(w_svm, bounds)
+    (x_p, y_p) = weights_to_mxb_2D(w_pla, bounds)
     c = np.where(y==1, 'r', 'b')
     plt.scatter(x_plot,y_plot, s, c=c)
     plt.plot(x_f, y_f, 'k-.')
     plt.plot(x_w, y_w, 'b')
+    plt.plot(x_p, y_p, 'r--')
     plt.xlim([-1, 1])
     plt.ylim([-1, 1])
     plt.grid()
@@ -42,22 +50,24 @@ def answers():
     for i in range(num_experiments):
         (X, y, f) = random_linearly_separable_data(num_points, bounds)
         (w_svm, vectors) = linsep_svm(X, y)
+
         pla = PLA(bounds=bounds)
         pla.fit(X, y)
         w_pla = pla.weights
+
         E_svm = linear_randomized_Eout(f, w_svm, bounds)
         E_pla = linear_randomized_Eout(f, w_pla, bounds)
         if E_svm < E_pla:
             times_svm_better += 1
         total_num_vectors += len(vectors)
 
-    print "Number of points used:            ", num_points
-    print "Proportion of times SVM beats PLA:", times_svm_better/num_experiments
-    print "Average number of support vectors:", total_num_vectors/num_experiments
+    print("Number of points used:            ", num_points)
+    print("Proportion of times SVM beats PLA:", times_svm_better/num_experiments)
+    print("Average number of support vectors:", total_num_vectors/num_experiments)
 
 if __name__ == '__main__':
-    plot_svm()
-    #answers()
+    #plot_svm()
+    answers()
 
 
 

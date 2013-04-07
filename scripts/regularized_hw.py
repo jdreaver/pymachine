@@ -40,7 +40,7 @@ def plot_sample(nonreg=True, k = 0):
     if nonreg is True:
         w = linear_regression(X_train, y_train)
     else:
-        w = weight_decay_regression(X_train, y_train, 10.0**k/N)
+        w = weight_decay_regression(X_train, y_train, 10.0**k)
 
     def plot_decision_fn(X):
         X_trans = transform(X)
@@ -49,8 +49,8 @@ def plot_sample(nonreg=True, k = 0):
     (cont_x, cont_y, cont_z) = decision_boundary_2D(-1, 1, 0.0025, -1, 1, 0.0025, 
                                                     plot_decision_fn)
 
-    print "E_in :", linear_error(X_train, y_train, w)
-    print "E_out:", linear_error(X_test, y_test, w)
+    print("E_in :", linear_error(X_train, y_train, w))
+    print("E_out:", linear_error(X_test, y_test, w))
 
     x_plot = X_test_raw[:,0]
     y_plot = X_test_raw[:,1]
@@ -70,22 +70,22 @@ def test_weight_decay():
     X_test = transform(X_test_raw)
     (N, dim) = X_train.shape
 
-    w_reg = weight_decay_regression(X_train, y_train, 10.0**k/N)
+    w_reg = weight_decay_regression(X_train, y_train, 10.0**k)
     w_reg1 = np.dot(np.linalg.inv(np.dot(X_train.T, X_train) + 
                                   (10.0**k/N * np.identity(dim))),
                     np.dot(X_train.T, y_train))
-    w_reg2 = np.linalg.solve(np.dot(X_train.T, X_train) + (10.0**k/N * np.identity(dim)), 
+    w_reg2 = np.linalg.solve(np.dot(X_train.T, X_train) + (10.0**k * np.identity(dim)), 
                              np.dot(X_train.T, y_train))
-    print w_reg - w_reg1
+    print(w_reg - w_reg1)
     #print w_reg - w_reg2
-    print w_reg
+    print(w_reg)
     E_in_reg = linear_error(X_train, y_train, w_reg)
     E_out_reg = linear_error(X_test, y_test, w_reg)
     
-    print "k =", k, "constant =", 10.0**k/N
-    print "   E_in:   ", E_in_reg
-    print "   E_out:  ", E_out_reg
-    print "   w^2sum: ", np.power(w_reg, 2).sum()
+    print("k =", k, "constant =", 10.0**k/N)
+    print("   E_in:   ", E_in_reg)
+    print("   E_out:  ", E_out_reg)
+    print("   w^2sum: ", np.power(w_reg, 2).sum())
 
 def answers():
     k_list = np.array([-3, -2, -1, 0, 1, 2, 3])
@@ -103,14 +103,14 @@ def answers():
     E_out_nonreg = linear_error(X_test, y_test, w_nonreg)
 
 
-    print "Number of train points:", X_train.shape[0]
-    print "Number of test points: ", X_test.shape[0]
-    print "\nNon-regularized stats: "
-    print "   E_in:   ", E_in_nonreg
-    print "   E_out:  ", E_out_nonreg
-    print "   w^2sum: ", np.power(w_nonreg, 2).sum()
+    print("Number of train points:", X_train.shape[0])
+    print("Number of test points: ", X_test.shape[0])
+    print("\nNon-regularized stats: ")
+    print("   E_in:   ", E_in_nonreg)
+    print("   E_out:  ", E_out_nonreg)
+    print("   w^2sum: ", np.power(w_nonreg, 2).sum())
 
-    print "Regularized stats: "
+    print("Regularized stats: ")
     E_in_reg = np.zeros(len(k_list))
     E_out_reg = np.zeros(len(k_list))
     
@@ -120,10 +120,10 @@ def answers():
         E_in_reg[i] = linear_error(X_train, y_train, w_reg)
         E_out_reg[i] = linear_error(X_test, y_test, w_reg)
 
-        print "   k =", k, "constant =", decay
-        print "      E_in:   ", E_in_reg[i]
-        print "      E_out:  ", E_out_reg[i]
-        print "      w^2sum: ", np.power(w_reg, 2).sum()
+        print("   k =", k, "constant =", decay)
+        print("      E_in:   ", E_in_reg[i])
+        print("      E_out:  ", E_out_reg[i])
+        print("      w^2sum: ", np.power(w_reg, 2).sum())
 
 if __name__ == '__main__':
     answers()

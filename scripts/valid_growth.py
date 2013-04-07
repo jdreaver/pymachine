@@ -20,9 +20,9 @@ def ans():
         for f in functions:
             if f(N) > e(N):
                 functions.remove(f)
-                print "Function {0} failed at N={1}".format(f, N)
-                print "Expected {0}, got {1}".format(e(N), f(N))
-    print "Tested up to N =", N_max
+                print("Function {0} failed at N={1}".format(f, N))
+                print("Expected {0}, got {1}".format(e(N), f(N)))
+    print("Tested up to N =", N_max)
 
 if __name__ == '__main__':
     ans()

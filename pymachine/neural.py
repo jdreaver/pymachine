@@ -88,8 +88,8 @@ def SGD(X, y, network, eta=0.1, tol=0.01, max_iter=500, printing=False):
     while num_epochs < max_iter:
         num_epochs += 1
         if printing is True:
-            print num_epochs, "/", max_iter
-        order = range(N)
+            print(num_epochs, "/", max_iter)
+        order = list(range(N))
         random.shuffle(order)
         #old_weights = np.copy(network.weights)        
         for i in order:

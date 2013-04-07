@@ -1,4 +1,4 @@
-from __future__ import division
+
 import numpy as np
 
 from pymachine.datagen import random_linearly_separable_data
@@ -20,7 +20,7 @@ def linsep_logistic(num_points=100, num_experiments=100, tol=0.01, eta=0.01, max
         E_out = cross_entropy_randomized_Eout(f, weights, bounds)
         all_epochs[i] = num_epochs
         all_E_out[i] = E_out
-        print i+1, num_epochs, E_out
+        print(i+1, num_epochs, E_out)
 
     return all_epochs.mean(), all_E_out.mean()
 
@@ -29,7 +29,7 @@ def test(num_points=100, tol=0.01, eta=0.01, max_iter=2000):
     (X, y, f) = random_linearly_separable_data(num_points, bounds)
     (w, num) = logistic_gradient_descent(X, y, tol, eta, max_iter)
 
-    print num, cross_entropy_randomized_Eout(f, w, bounds)
+    print(num, cross_entropy_randomized_Eout(f, w, bounds))
     
     positives = X[np.where(y==1)]
     negatives = X[np.where(y==-1)]

@@ -4,17 +4,17 @@ import numpy as np
 from pymachine.neural import (NeuralNetwork, SGD, compute_activations, modify_weights,
                               network_gradient)
 from pymachine.visualization import decision_boundary_2D
-from regularized_hw import get_data
+from .regularized_hw import get_data
 
 
 def wtf():
     # layer_sizes = [2, 6, 1]
     # print [(layer_sizes[i], layer_sizes[i + i]) for i in range(2)]
     x = [2, 6, 1, 5]
-    print x, range(len(x) - 1)
+    print(x, list(range(len(x) - 1)))
     #print [(x[i], x[i + i]) for i in range(len(x) - 1)]
     #print [(i + 1) for i in range(len(x) - 1)]
-    print [(x[i], x[i + 1]) for i in range(len(x) - 1)]
+    print([(x[i], x[i + 1]) for i in range(len(x) - 1)])
 
 def x_squared_plot():
     layer_sizes = [2, 6, 6, 1]
@@ -65,7 +65,7 @@ def test_gradient():
     nn.weights = modify_weights(nn, derivs, 0.1)
     error2 = np.abs(compute_activations(X[0], nn)[-1] - y[0])
 
-    print error1, error2
+    print(error1, error2)
     
 
 if __name__ == '__main__':

@@ -39,7 +39,7 @@ def logistic_gradient_descent(X, y, tol, eta, max_iter):
     num_epochs = 0
     while num_epochs < max_iter:
         num_epochs += 1
-        order = range(N)
+        order = list(range(N))
         random.shuffle(order)
         old_weights = np.copy(weights)
         for i in order:

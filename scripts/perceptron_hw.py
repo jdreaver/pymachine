@@ -26,5 +26,5 @@ def calculate_ans(num_points=10, num_experiments=1000, damping=None):
         #all_g[i] = weights
         #all_f[i] = f
 
-    print "Average iterations to converge:", num_iterations.mean()
-    print "Average probability of error:", overlap_error.mean()
+    print("Average iterations to converge:", num_iterations.mean())
+    print("Average probability of error:", overlap_error.mean())

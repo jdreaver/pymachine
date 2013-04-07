@@ -36,6 +36,10 @@ def decision_boundary_2D(xmin, xmax, xdelta, ymin, ymax, ydelta, decision_fn):
 
 def weights_to_mxb_2D(w, bounds):
     bounds = np.array(bounds)
-    x = bounds[:2]
-    y = -x*w[1]/w[2] - w[0]/w[2]
+    if w[2] == 0 or w[1]/w[2] or np.isinf(w[1]/w[2]):
+        x = np.array([-w[0]/w[1]]*2)
+        y = bounds[2:]
+    else:
+        x = bounds[:2]
+        y = -x*w[1]/w[2] - w[0]/w[2]
     return (x,y)
