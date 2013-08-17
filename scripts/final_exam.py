@@ -164,6 +164,3 @@ def rbf_answers(k=9, gamma=1.5):
     print("Average value of E_out_svm: ", sum_E_out_svm/good_runs)
     print("Average value of E_in_rbf:  ", sum_E_in_rbf/good_runs)
     print("Average value of E_out_rbf: ", sum_E_out_rbf/good_runs)
-        
-            
-                

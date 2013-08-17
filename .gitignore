@@ -38,3 +38,5 @@ nosetests.xml
 
 # Dont add figures
 figures/
+
+.ropeproject
